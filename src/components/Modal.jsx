@@ -4,7 +4,6 @@ import { PlusCircle } from 'phosphor-react'
 import Input from './Input'
 
 export default function Modal({ open, setOpen }) {
-    console.info("open 1 :: ", open)
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -27,9 +26,24 @@ export default function Modal({ open, setOpen }) {
                   Novo usuário
                 </DialogTitle>
                 <div className="mt-2 flex flex-col gap-4">
-                  <Input name="Nome" />
-                  <Input name="E-mail" />
-                  <Input name="Telefone" />
+                  <Input
+                    name="Nome"
+                    type="text"
+                    placeholder="Insira seu nome"
+                    id="name"
+                  />
+                  <Input
+                    name="E-mail"
+                    type="email"
+                    placeholder="Insira seu e-mail"
+                    id="email"
+                  />
+                  <Input
+                    name="Telefone"
+                    type="number"
+                    placeholder="Insira seu telefone"
+                    id="phone"
+                  />
                 </div>
               </div>
             </div>

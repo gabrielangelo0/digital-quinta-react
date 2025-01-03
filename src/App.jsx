@@ -1,9 +1,27 @@
 import { PencilSimple, TrashSimple } from "phosphor-react"
 import Modal from "./components/Modal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios";
 
 function App() {
   const [open, setOpen] = useState(false)
+  const [usuarios, setUsuarios] = useState([])
+
+  async function buscarUsuarios() {
+    const usuariosDados = await axios.get("http://localhost:3000/users");
+
+    setUsuarios(usuariosDados.data);
+    // console.log(usuariosDados.data);
+  }
+
+  console.log(usuarios);
+
+  // buscarUsuarios();
+
+  useEffect(() => {
+    buscarUsuarios();
+  }, [])
+
 
   return (
     <main>
