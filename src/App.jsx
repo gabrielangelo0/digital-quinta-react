@@ -2,21 +2,20 @@ import { PencilSimple, TrashSimple } from "phosphor-react"
 import Modal from "./components/Modal"
 import { useEffect, useState } from "react"
 import axios from "axios";
+import ModalDelete from "./components/ModalDelete";
 
 function App() {
   const [open, setOpen] = useState(false)
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+
   const [usuarios, setUsuarios] = useState([])
 
+  console.log(usuarios);
   async function buscarUsuarios() {
-    const usuariosDados = await axios.get("http://localhost:3000/users");
+    const usuariosDados = await axios.get("http://localhost:3001/users");
 
     setUsuarios(usuariosDados.data);
-    // console.log(usuariosDados.data);
   }
-
-  console.log(usuarios);
-
-  // buscarUsuarios();
 
   useEffect(() => {
     buscarUsuarios();
@@ -39,24 +38,31 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="px-6">Gabriel</td>
-            <td>gabriel@digital.com</td>
-            <td>8599999999</td>
+          {usuarios.map((usuario) => (
+            <tr>
+            <td className="px-6">{usuario.name}</td>
+            <td>{usuario.email}</td>
+            <td>{usuario.phone}</td>
             <td className="px-6">
               <div>
                 <button>
                   <PencilSimple size={32} color="#cc9b14" weight="fill" />
                 </button>
-                <button>
+                <button onClick={() => setOpenModalDelete(true)}>
                   <TrashSimple size={32} color="#cc2714" weight="fill" />
                 </button>
               </div>
             </td>
           </tr>
+          ))}
         </tbody>
       </table>
-      <Modal open={open} setOpen={setOpen} />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        buscarUsuarios={buscarUsuarios}
+      />
+      <ModalDelete open={openModalDelete} setOpen={setOpenModalDelete} />
     </main>
   )
 }

@@ -2,8 +2,43 @@ import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { PlusCircle } from 'phosphor-react'
 import Input from './Input'
+import axios from 'axios';
 
-export default function Modal({ open, setOpen }) {
+export default function Modal({ open, setOpen, buscarUsuarios }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  function handleChangeName(ev) {
+    setName(ev.target.value);
+  }
+
+  function handleChangeEmail(ev) {
+    setEmail(ev.target.value);
+  }
+
+  function handleChangePhone(ev) {
+    setPhone(ev.target.value);
+  }
+
+  async function addUser() {
+    try {
+      await axios.post("http://localhost:3000/users", {
+        name,
+        email,
+        phone
+      })
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      buscarUsuarios();
+      setOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -21,24 +56,30 @@ export default function Modal({ open, setOpen }) {
               <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-emerald-100 sm:mx-0 sm:size-10">
                 <PlusCircle size={32} className='text-emerald-800' />
               </div>
-              <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                 <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
                   Novo usuário
                 </DialogTitle>
                 <div className="mt-2 flex flex-col gap-4">
                   <Input
+                    onChange={handleChangeName}
+                    width="w-full"
                     name="Nome"
                     type="text"
                     placeholder="Insira seu nome"
                     id="name"
                   />
                   <Input
+                    onChange={handleChangeEmail}
+                    width="w-full"
                     name="E-mail"
                     type="email"
                     placeholder="Insira seu e-mail"
                     id="email"
                   />
                   <Input
+                    onChange={handleChangePhone}
+                    width="w-full"
                     name="Telefone"
                     type="number"
                     placeholder="Insira seu telefone"
@@ -50,7 +91,7 @@ export default function Modal({ open, setOpen }) {
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={addUser}
                 className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
               >
                 Salvar

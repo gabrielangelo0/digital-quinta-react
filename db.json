@@ -1,6 +1,46 @@
 {
-    "users": [
-      { "id": "1", "name": "Gabriel", "email": "gabriel@email.com", "phone": 85999999999 },
-      { "id": "2", "name": "Felipe", "email": "felipe@email.com", "phone": 85999999999 }
-    ]
-  }
+  "users": [
+    {
+      "id": "1",
+      "name": "Gabriel",
+      "email": "gabriel@email.com",
+      "phone": 85999999999
+    },
+    {
+      "id": "2",
+      "name": "Felipe",
+      "email": "felipe@email.com",
+      "phone": 85999999999
+    },
+    {
+      "id": "8560",
+      "name": "Igor",
+      "email": "igor@email.com",
+      "phone": "85998765433"
+    },
+    {
+      "id": "d4d5",
+      "name": "Igora",
+      "email": "igor@email.coma",
+      "phone": "859987654331"
+    },
+    {
+      "id": "4c70",
+      "name": "Eduardo",
+      "email": "edu@email.com",
+      "phone": "7837872"
+    },
+    {
+      "id": "2779",
+      "name": "SR BARRIGA",
+      "email": "gabriel@pontogo.com.br",
+      "phone": "887387837287"
+    },
+    {
+      "id": "af79",
+      "name": "PARMESAO",
+      "email": "gabriel@playtrek.com",
+      "phone": "78878787"
+    }
+  ]
+}
